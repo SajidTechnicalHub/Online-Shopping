@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="well mb-3" id="chatbox">
+		<% @messages.each do |message| %>
+			<%= render 'messages/message', message: message %>
+		<% end %>
+	</div>
+	<% if current_user %>
+		<%= form_with model: @message do |f| %>
+			<div class="input-group mb-3">
+				<%= f.text_field :body, placeholder:'Say Somthings...', class: 'form-control'  %>
+			</div>
+			<div class="input-group-append">
+				<%= f.submit 'Send',class:'btn btn-secondary' %>
+			</div>
+		<% end %>
+	<% else %>
+	<div class="text-center">
+		<p> You have to <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %> to continue chat</p>
+	</div>
+	<% end %>
+</div>
